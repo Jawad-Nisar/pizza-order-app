@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy enable_complete ]
 
   def index
-    @orders = Order.includes(:items :topings)
+    @orders = Order.all
   end
 
   def show
@@ -16,7 +16,18 @@ class OrdersController < ApplicationController
   end
 
   def create
+    total_price = 0
     @order = Order.new(order_params)
+    topings = Toping.where(id: order_params.topings_id)
+    items = Item.where(id: order_params.items_id)
+    topings.each do |toping|
+      total_price = total_price + toping.price
+    end
+    items.each do |item|
+      total_price = total_price + item.price
+    end
+    
+    @order.total_price = total_price
 
     respond_to do |format|
       if @order.save
@@ -30,6 +41,18 @@ class OrdersController < ApplicationController
   end
 
   def update
+    total_price = 0
+    @order = Order.new(order_params)
+    topings = Toping.where(id: order_params.topings_id)
+    items = Item.where(id: order_params.items_id)
+    topings.each do |toping|
+      total_price = total_price + toping.price
+    end
+    items.each do |item|
+      total_price = total_price + item.price
+    end
+    
+    @order.total_price = total_price
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
@@ -53,9 +76,9 @@ class OrdersController < ApplicationController
   def enable_complete
     @order.update(completed: true)
     if @order.save
-      return :json "status updated", status: :success
+      render json: "status updated", status: :success
     else
-      return :json "not updated", status: :unprocessable_entity
+      render json: "not updated", status: :unprocessable_entity
     end 
   end
   
