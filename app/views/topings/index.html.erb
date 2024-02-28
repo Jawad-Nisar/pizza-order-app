@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Topings</h1>
+
+<div id="topings">
+  <% @topings.each do |toping| %>
+    <%= render toping %>
+    <p>
+      <%= link_to "Show this toping", toping %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New toping", new_toping_path %>

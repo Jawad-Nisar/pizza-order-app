@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @toping %>
+
+<div>
+  <%= link_to "Edit this toping", edit_toping_path(@toping) %> |
+  <%= link_to "Back to topings", topings_path %>
+
+  <%= button_to "Destroy this toping", @toping, method: :delete %>
+</div>
