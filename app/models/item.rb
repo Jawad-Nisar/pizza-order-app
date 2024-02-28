@@ -1,4 +1,4 @@
 class Item < ApplicationRecord
-  has_many :topings
+  validates :name, presence: true
   belongs_to :order
 end
