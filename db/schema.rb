@@ -10,21 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_115609) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_141655) do
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
   end
 
   create_table "orders", force: :cascade do |t|
     t.boolean "completed"
     t.string "promotion_code"
     t.string "discount_code"
-    t.integer "items_id", null: false
     t.integer "topings_id", null: false
+    t.integer "items_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_price"
     t.index ["items_id"], name: "index_orders_on_items_id"
     t.index ["topings_id"], name: "index_orders_on_topings_id"
   end
@@ -33,6 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_115609) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
   end
 
   add_foreign_key "orders", "items", column: "items_id"

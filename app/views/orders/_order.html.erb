@@ -1,8 +1,4 @@
 <div id="<%= dom_id order %>">
-  <p>
-    <strong>Completed:</strong>
-    <%= order.completed %>
-  </p>
 
   <p>
     <strong>Promotion code:</strong>
@@ -16,12 +12,41 @@
 
   <p>
     <strong>Topings:</strong>
-    <%= order.topings_id %>
+    <%# order.topings_id %>
+    <% order.topings.each do |toping| %>
+      <%= toping.name %>
+    <% end %>
   </p>
 
   <p>
     <strong>Items:</strong>
-    <%= order.items_id %>
+    <%# order.items_id %>
+    <% order.items.each do |item| %>
+      <%= item.name %>
+    <% end %>
   </p>
 
+  <p>
+    <strong>Created:</strong>
+    <%= time_ago_in_words(order.created_at) %>
+  </p>
+
+  <p>
+    <strong>Total Price:</strong>
+    <%= order.total_price %>
+  </p>
+
+  <input id="complete" type="button" name="complete" value="complete" data-attr=<%= order.id %>>
+
 </div>
+
+<script>
+let element = document.getElementsById("complete");
+let order_id = element.dataset.attr
+
+        $( "#complete" ).click(function(){});
+        $.post( `http://localhost:3000/order/${order_id}/enable_complete`, function( data ) {
+          $( ".result" ).html( data );
+          alert( "Load was performed." );
+        });
+</script>
