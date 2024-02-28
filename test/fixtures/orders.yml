@@ -4,10 +4,12 @@ one:
   completed: false
   promotion_code: MyString
   discount_code: MyString
+  topings: one
   items: one
 
 two:
   completed: false
   promotion_code: MyString
   discount_code: MyString
+  topings: two
   items: two

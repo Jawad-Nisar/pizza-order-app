@@ -18,6 +18,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Discount code", with: @order.discount_code
     fill_in "Items", with: @order.items_id
     fill_in "Promotion code", with: @order.promotion_code
+    fill_in "Topings", with: @order.topings_id
     click_on "Create Order"
 
     assert_text "Order was successfully created"
@@ -32,6 +33,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Discount code", with: @order.discount_code
     fill_in "Items", with: @order.items_id
     fill_in "Promotion code", with: @order.promotion_code
+    fill_in "Topings", with: @order.topings_id
     click_on "Update Order"
 
     assert_text "Order was successfully updated"
