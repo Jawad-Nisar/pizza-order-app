@@ -18,8 +18,8 @@ class OrdersController < ApplicationController
   def create
     total_price = 0
     @order = Order.new(order_params)
-    topings = Toping.where(id: order_params.topings_id)
-    items = Item.where(id: order_params.items_id)
+    topings = Toping.where(id: order_params[:topings_id])
+    items = Item.where(id: order_params[:items_id])
     topings.each do |toping|
       total_price = total_price + toping.price
     end
